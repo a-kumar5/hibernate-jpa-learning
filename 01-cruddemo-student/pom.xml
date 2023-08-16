@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.techchaggi.learning.spring</groupId>
-	<artifactId>hibernatejpademo</artifactId>
+	<artifactId>CruddemoApplication</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>hibernatejpademo</name>
+	<name>CruddemoApplication</name>
 	<description>Demo project for Spring Boot hibernate jpa learning</description>
 	<properties>
 		<java.version>17</java.version>
