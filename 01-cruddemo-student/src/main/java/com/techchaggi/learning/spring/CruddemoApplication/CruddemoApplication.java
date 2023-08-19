@@ -1,13 +1,13 @@
 package com.techchaggi.learning.spring.CruddemoApplication;
 
-
 import com.techchaggi.learning.spring.CruddemoApplication.dao.StudentDAO;
 import com.techchaggi.learning.spring.CruddemoApplication.entity.Student;
-import jakarta.persistence.EntityManager;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import java.util.List;
 
 @SpringBootApplication
 public class CruddemoApplication {
@@ -17,22 +17,64 @@ public class CruddemoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(StudentDAO studentDAO){
+	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
 
 		return runner -> {
-			//createStudent(studentDAO);
+			// createStudent(studentDAO);
 
 			// creating multiple students
-			createMultipleStudent(studentDAO);
+			// createMultipleStudent(studentDAO);
+
+			// read student
+			// readStudent(studentDAO);
+
+			// run query and display result
+			queryForStudents(studentDAO);
 		};
+	}
+
+	private void queryForStudents(StudentDAO studentDAO) {
+
+		// get a list of students
+		List<Student> theStudents = studentDAO.findAll();
+
+		// display list of students
+		for (Student tempStudent : theStudents){
+			System.out.println(tempStudent);
+		}
+	}
+
+	private void readStudent(StudentDAO studentDAO) {
+
+		// create the student object
+		System.out.println("Creating the student object....");
+		Student tempStudent = new Student("Jim", "Carrey", "jim.carrey@gmail.com");
+
+		// save the student in database
+		System.out.println("Saving the student.....");
+		studentDAO.save(tempStudent);
+		
+		// display the id of the student object
+		int theId = tempStudent.getId();
+		System.out.println("Saved Student. Generated id: " + theId);
+		
+		
+		
+		// retrieve the student based on the id: primary key
+		System.out.println("Retrieving student with id: "+ theId);
+		Student myStudent = studentDAO.findByID(theId);
+		
+		// display student
+		System.out.println("Found the student: " + myStudent);
+
 	}
 
 	private void createMultipleStudent(StudentDAO studentDAO) {
 		// create multiple student
 		System.out.println("Creating the student object....");
-		Student tempStudent1 = new Student("Ryan","Gosling","ryan.gosling@gmail.com");
-		Student tempStudent2 = new Student("John","Cena","john.cena@gmail.com");
-		Student tempStudent3 = new Student("leo","caprio","leo.caprio@gmail.com");
+		Student tempStudent1 = new Student("Ryan", "Gosling", "ryan.gosling@gmail.com");
+		Student tempStudent2 = new Student("John", "Cena", "john.cena@gmail.com");
+		Student tempStudent3 = new Student("leo", "caprio", "leo.caprio@gmail.com");
 
 		// save the student in database
 		System.out.println("Saving the student.....");
@@ -46,7 +88,7 @@ public class CruddemoApplication {
 
 		// create the student object
 		System.out.println("Creating the student object....");
-		Student tempStudent = new Student("Aishwarya","Mathad","aish120796@gmail.com");
+		Student tempStudent = new Student("Jim", "Carrey", "jim.carrey@gmail.com");
 
 		// save the student
 		System.out.println("Saving the student.....");
