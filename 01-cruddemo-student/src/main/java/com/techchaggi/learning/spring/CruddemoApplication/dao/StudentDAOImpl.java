@@ -9,15 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public class StudentDAOImpl implements StudentDAO{
+public class StudentDAOImpl implements StudentDAO {
 
     // define field for entitiy mananger
     private EntityManager entityManager;
 
     //inject entity manager using constructor injection
-    public StudentDAOImpl(EntityManager entityManager){
+    public StudentDAOImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
+
     // implements save method
     @Override
     @Transactional
@@ -27,7 +28,7 @@ public class StudentDAOImpl implements StudentDAO{
 
     @Override
     public Student findByID(Integer id) {
-       return entityManager.find(Student.class, id);
+        return entityManager.find(Student.class, id);
     }
 
     @Override
@@ -58,5 +59,17 @@ public class StudentDAOImpl implements StudentDAO{
     @Transactional
     public void update(Student theStudent) {
         entityManager.merge(theStudent);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Integer id) {
+
+        // retrieve student by id
+        Student theStudent = entityManager.find(Student.class, id);
+
+        // delete the student
+        entityManager.remove(theStudent);
+
     }
 }

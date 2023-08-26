@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface StudentDAO {
     void save(Student theStudent);
+
     Student findByID(Integer id);
 
     List<Student> findAll();
@@ -13,4 +14,6 @@ public interface StudentDAO {
     List<Student> findByLastName(String theLastName);
 
     void update(Student theStudent);
+
+    void delete(Integer id);
 }
